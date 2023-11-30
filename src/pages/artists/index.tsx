@@ -2,7 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import withLayout from '@/components/hoc/withLayout';
 import Link from 'next/link';
-import { convertDate } from '@/helpers/utils';
+import { convertDate, getBaseUrl } from '@/helpers/utils';
 import { Artist } from '@/types';
 
 interface ArtistProps {
@@ -37,7 +37,7 @@ const Artists = ({ artists }: ArtistProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/artists');
+  const res = await fetch(`${getBaseUrl()}/api/artists`);
   const artists = await res.json();
   return {
     props: { artists },

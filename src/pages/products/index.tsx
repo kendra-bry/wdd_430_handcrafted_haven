@@ -1,6 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import withLayout from '@/components/hoc/withLayout';
+import { getBaseUrl } from '@/helpers/utils';
 
 export interface Product {
   id: string;
@@ -35,7 +36,7 @@ const Products = ({ products }: ProductProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/products/readAll');
+  const res = await fetch(`${getBaseUrl()}/api/products/readAll`);
   const products = await res.json();
   return {
     props: { products },

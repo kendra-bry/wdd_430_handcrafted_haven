@@ -40,11 +40,29 @@ const Artists = ({ artists }: ArtistProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`${url}/api/artists`);
-  const artists = await res.json();
-  return {
-    props: { artists },
-  };
+  try {
+    console.log({ url });
+
+    const res = await fetch(`${url}/api/artists`);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
+    }
+
+    const artists = await res.json();
+
+    return {
+      props: { artists },
+    };
+  } catch (error: any) {
+    console.error('Error fetching data:', error.message);
+
+    return {
+      props: {
+        artists: [],
+      },
+    };
+  }
 };
 
 export default withLayout(Artists);

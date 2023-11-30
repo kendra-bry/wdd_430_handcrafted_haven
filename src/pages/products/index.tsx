@@ -39,11 +39,27 @@ const Products = ({ products }: ProductProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`${url}/api/products/readAll`);
-  const products = await res.json();
-  return {
-    props: { products },
-  };
+  try {
+    const res = await fetch(`${url}/api/products/readAll`);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
+    }
+
+    const products = await res.json();
+
+    return {
+      props: { products },
+    };
+  } catch (error: any) {
+    console.error('Error fetching data:', error.message);
+
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 };
 
 export default withLayout(Products);

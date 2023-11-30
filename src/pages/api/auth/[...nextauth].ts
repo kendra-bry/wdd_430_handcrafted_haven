@@ -10,6 +10,8 @@ enum SessionStrategy {
   Database = 'database',
 }
 
+const loginUrl = process.env.NEXT_PUBLIC_VERCEL_URL ?? process.env.NEXT_PUBLIC_BASE_URL;
+
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
@@ -38,7 +40,7 @@ export const authOptions = {
           password: string;
         };
 
-        const res = await fetch(`${process.env.LOGIN_URL}`, {
+        const res = await fetch(`${loginUrl}/api/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

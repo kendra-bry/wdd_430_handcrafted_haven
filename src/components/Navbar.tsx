@@ -21,6 +21,7 @@ const Navbar = () => {
   const handleSignOut = async (e: React.MouseEvent) => {
     e.preventDefault();
     await signOut();
+    router.push('/');
   };
 
   const handleSignIn = async (e: React.MouseEvent) => {

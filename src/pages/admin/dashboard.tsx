@@ -16,10 +16,6 @@ const Dashboard = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchData(activeTab);
-  }, [activeTab]);
-
   const fetchData = async (tab: string) => {
     try {
       let response, data;
@@ -58,6 +54,11 @@ const Dashboard = () => {
       console.error(`Error fetching data for ${tab}:`, error);
     }
   };
+
+  useEffect(() => {
+    fetchData(activeTab);
+  }, [activeTab, ]);
+
 
   if (user?.role! !== 'ADMIN') {
     return (

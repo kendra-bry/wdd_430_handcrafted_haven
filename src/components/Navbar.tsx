@@ -31,7 +31,7 @@ const Navbar = () => {
   useEffect(() => {
     const currentUrl = router.asPath;
     setActivePage(currentUrl);
-  }, []);
+  }, [router.asPath]);
 
   return (
     <nav className="border-gray-200 bg-gray-900 w-full">

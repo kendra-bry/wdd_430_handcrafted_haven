@@ -23,9 +23,9 @@ const Products = ({ products }: ProductProps) => {
       <h1 className="text-4xl mb-5">Product Listings</h1>
       <div className="border rounded p-4">
         <div className="flex border">
-          {products.map((product) => (
-            <div className="border  border-accent">
-              {product.name} - ${product.price}.00
+          {products.map((p) => (
+            <div key={p.id} className="border  border-accent">
+              {p.name} - ${p.price}.00
             </div>
           ))}
         </div>

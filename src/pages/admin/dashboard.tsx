@@ -79,7 +79,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className={`flex min-h-screen flex-col container px-4 md:px-24 my-10`}>
+    <div className={`flex min-h-screen flex-col px-4 md:px-24 my-10`}>
       <h1 className="text-4xl">Admin Dashboard</h1>
       <div className="mt-5">
         <div className="flex space-x-4 mb-4">

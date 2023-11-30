@@ -14,6 +14,6 @@ export default async function handle(
     res.status(200).json(products);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error.' });
+    res.status(500).json({ error });
   }
 }

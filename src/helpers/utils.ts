@@ -5,7 +5,8 @@ const convertDate = (date: string | Date | undefined) => {
 };
 
 const getBaseUrl = () => {
-  const base = process.env.NEXT_PUBLIC_VERCEL_URL ?? process.env.NEXT_PUBLIC_BASE_URL;
+  // const base = process.env.NEXT_PUBLIC_VERCEL_URL ?? process.env.NEXT_PUBLIC_BASE_URL;
+  const base = process.env.NEXT_PUBLIC_BASE_URL;
   const protocol = process.env.NEXT_PUBLIC_VERCEL_URL ? 'https://' : 'http://'
   return `${protocol}${base}`
 }

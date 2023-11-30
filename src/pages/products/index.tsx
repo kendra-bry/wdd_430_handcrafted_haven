@@ -18,7 +18,10 @@ interface ProductProps {
   products: Product[];
 }
 
+const url = getBaseUrl();
+
 const Products = ({ products }: ProductProps) => {
+  console.log({ url });
   return (
     <div className={`flex min-h-screen flex-col px-4 md:px-24 my-10`}>
       <h1 className="text-4xl mb-5">Product Listings</h1>
@@ -36,8 +39,6 @@ const Products = ({ products }: ProductProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const url = getBaseUrl();
-  console.log({ url });
   const res = await fetch(`${url}/api/products/readAll`);
   const products = await res.json();
   return {

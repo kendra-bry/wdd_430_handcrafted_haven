@@ -20,7 +20,7 @@ interface ProductProps {
 
 const Products = ({ products }: ProductProps) => {
   return (
-    <div className={`flex min-h-screen flex-col container px-4 md:px-24 my-10`}>
+    <div className={`flex min-h-screen flex-col px-4 md:px-24 my-10`}>
       <h1 className="text-4xl mb-5">Product Listings</h1>
       <div className="border rounded p-4">
         <div className="flex border">
@@ -36,7 +36,9 @@ const Products = ({ products }: ProductProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`${getBaseUrl()}/api/products/readAll`);
+  const url = getBaseUrl();
+  console.log({ url });
+  const res = await fetch(`${url}/api/products/readAll`);
   const products = await res.json();
   return {
     props: { products },

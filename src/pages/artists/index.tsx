@@ -37,7 +37,9 @@ const Artists = ({ artists }: ArtistProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`${getBaseUrl()}/api/artists`);
+  const url = getBaseUrl();
+  console.log({ url });
+  const res = await fetch(`${url}/api/artists`);
   const artists = await res.json();
   return {
     props: { artists },

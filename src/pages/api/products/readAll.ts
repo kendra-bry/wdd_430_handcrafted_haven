@@ -11,10 +11,9 @@ export default async function handle(
     const products = await prisma.product.findMany({
       include: { seller: true, reviews: true },
     });
-    console.log({ products });
     res.status(200).json(products);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error });
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error.' });
   }
 }

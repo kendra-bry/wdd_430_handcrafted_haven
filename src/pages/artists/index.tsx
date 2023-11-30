@@ -12,7 +12,6 @@ interface ArtistProps {
 const url = getBaseUrl();
 
 const Artists = ({ artists }: ArtistProps) => {
-  console.log({ url });
   return (
     <div
       className={`flex min-h-screen flex-col items-center px-4 md:px-24 my-10`}
@@ -41,8 +40,6 @@ const Artists = ({ artists }: ArtistProps) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    console.log({ url });
-
     const res = await fetch(`${url}/api/artists`);
 
     if (!res.ok) {

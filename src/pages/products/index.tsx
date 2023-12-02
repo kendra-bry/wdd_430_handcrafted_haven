@@ -5,6 +5,9 @@ import { getBaseUrl } from '@/helpers/utils';
 import { Product } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import SearchBar from '@/components/SearchBar';
+import CustomFilter from '@/components/CustomFilter';
+import { categories } from '@/constants/constants';
 
 interface ProductProps {
   products: Product[];
@@ -14,9 +17,19 @@ const url = getBaseUrl();
 
 const Products = ({ products }: ProductProps) => {
   return (
-    <div className="container mx-auto p-6 border border-white rounded mt-5">
+    <div className="container mx-auto p-6 border border-white rounded mt-1">
       <h1 className="text-3xl font-semibold mb-4">Our Products</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="mt-2 padding-x max-width rounded-md">
+        <div className="filters">
+          <SearchBar />
+          <div className="filter-container">
+            <p className="px-3">Categories</p>
+            <CustomFilter title="Categories" option={categories} />
+          </div>
+        </div>
+      </div>
+
+      <div className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {products.map((product) => (
           <Link href={`/products/${product.id}`} key={product.id} className="">
             <div className="bg-gray-200 p-4 rounded-md shadow-md hover:scale-105 transition-transform duration-300 ease-in-out border-4 border-accent">
@@ -24,7 +37,7 @@ const Products = ({ products }: ProductProps) => {
               {!!product.images?.length && (
                 <Image
                   src={product.images[0]}
-                  alt={product.name}
+                  alt={product.name || 'Product'}
                   width={50}
                   height={50}
                   className="w-full h-32 object-cover mb-2 rounded-md"

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,7 +7,6 @@ import { useSession, signIn } from 'next-auth/react';
 import withLayout from '@/components/hoc/withLayout';
 import { Product, User } from '@/types';
 import { convertFullDate, getBaseUrl } from '@/helpers/utils';
-import { getProductIds } from '../api/products/read';
 
 interface ProductDetailsProps {
   product: Product;
@@ -53,7 +51,7 @@ const ProductDetailsPage = ({ product }: ProductDetailsProps) => {
                   {selectedImg && (
                     <Image
                       src={selectedImg}
-                      alt={product.name}
+                      alt={product.name || 'Product'}
                       fill
                       style={{ objectFit: 'cover' }}
                       className="rounded-md"
@@ -72,7 +70,7 @@ const ProductDetailsPage = ({ product }: ProductDetailsProps) => {
                       >
                         <Image
                           src={i}
-                          alt={product.name}
+                          alt={product.name || 'Product'}
                           fill
                           style={{ objectFit: 'cover' }}
                         />
@@ -99,10 +97,10 @@ const ProductDetailsPage = ({ product }: ProductDetailsProps) => {
             <p className="text-gray-600 font-semibold mb-2">
               Artist: &nbsp;
               <Link
-                href={`/artists/${product.seller.user.id}`}
+                href={`/artists/${product.seller?.user.id}`}
                 className="hover:underline"
               >
-                {product.seller.user.firstName} {product.seller.user.lastName}
+                {product.seller?.user.firstName} {product.seller?.user.lastName}
               </Link>
             </p>
           </div>

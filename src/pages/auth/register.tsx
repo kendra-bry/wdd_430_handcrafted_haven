@@ -1,7 +1,8 @@
-import React, { FormEvent, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 import { getBaseUrl } from '@/helpers/utils';
+import Head from 'next/head';
 
 interface SignInProps {}
 
@@ -18,22 +19,19 @@ const SignIn: React.FC<SignInProps> = () => {
     try {
       if (!validateForm()) return;
 
-      const res = await fetch(
-        `${getBaseUrl()}/api/auth/register`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            firstName,
-            lastName,
-            seller,
-            email,
-            password,
-          }),
+      const res = await fetch(`${getBaseUrl()}/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          seller,
+          email,
+          password,
+        }),
+      });
 
       const response = await res.json();
       if (res.ok) {
@@ -59,6 +57,9 @@ const SignIn: React.FC<SignInProps> = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
+      <Head>
+        <title>Register</title>
+      </Head>
       <div className="w-full max-w-md">
         <form
           onSubmit={handleRegistration}

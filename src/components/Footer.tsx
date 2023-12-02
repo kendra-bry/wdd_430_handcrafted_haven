@@ -16,7 +16,7 @@ const Footer = () => {
             Handcrafted Haven
           </h5>
         </div>
-        <p className="text-gray-500 ms-2">
+        <p className="text-gray-100 ms-2">
           Discover and support unique handmade treasures.
         </p>
       </div>
